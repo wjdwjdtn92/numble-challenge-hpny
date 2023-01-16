@@ -1,4 +1,4 @@
-import Icon from '../../assets/images/icon_arrow_back.svg';
+import HeaderNav from './HeaderNav';
 
 export default function Header({ $target, initialState }) {
   this.state = initialState;
@@ -16,21 +16,17 @@ export default function Header({ $target, initialState }) {
   };
 
   this.render = () => {
-    const bakcButton = this.state
-      ? `<button aria-label="뒤로가기 버튼">
-          <img src=${Icon} alt="뒤로가기 이미지"/>
-        </button>`
-      : '';
-
-    $header.innerHTML = `
-    <nav class="navigation">
-      ${bakcButton}
-      <h1 class="title">
-        HPNY 2023
-      </h1>
-    </nav>
-    `;
+    $header.innerHTML = '';
+    new HeaderNav({ $target: $header, props: this.state });
   };
 
   this.render();
+
+  $header.addEventListener('click', (event) => {
+    const $button = event.target.closest('button');
+
+    if ($button) {
+      history.back();
+    }
+  });
 }
