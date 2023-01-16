@@ -11,7 +11,7 @@ export default function PostItem({ $target, props }) {
 
     const { postId, title, createdAt, content, image } = this.props;
     const date = new Date(createdAt).toLocaleDateString();
-    $post.dataset.id = postId;
+    $post.dataset.postId = postId;
 
     $post.innerHTML = `
       <h3 class="post-title">${title}</h3>
