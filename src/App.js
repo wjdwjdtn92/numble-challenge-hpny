@@ -2,6 +2,7 @@ import Header from './components/layout/Header.js';
 import PostDetailPage from './pags/PostDetailPage.js';
 import PostListPage from './pags/PostListPage.js';
 import PostUploadPage from './pags/PostUploadPage.js';
+import { router } from './router.js';
 
 export default function App({ $target }) {
   const header = new Header({ $target, initialState: false });
@@ -13,7 +14,9 @@ export default function App({ $target }) {
     const { pathname } = location;
     $main.innerHTML = '';
 
+    console.log({ pathname });
     if (pathname === '/') {
+      header.setState(false);
       new PostListPage({ $target: $main });
       return;
     }
@@ -32,6 +35,9 @@ export default function App({ $target }) {
 
     $target.innerHTML = 'page not nound';
   };
+
+  router(this.route);
+  window.addEventListener('popstate', this.route);
 
   this.route();
 }
