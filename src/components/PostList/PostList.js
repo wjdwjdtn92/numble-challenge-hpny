@@ -1,7 +1,6 @@
-import { routeChage } from '../../router';
 import PostItem from './PostItem';
 
-export default function PostList({ $target, initialState }) {
+export default function PostList({ $target, initialState, onClick }) {
   this.state = initialState;
   const $postList = document.createElement('ul');
   $postList.className = 'post-list';
@@ -26,12 +25,12 @@ export default function PostList({ $target, initialState }) {
 
   this.render();
 
-  $postList.addEventListener('click', (event) => {
+  $postList.addEventListener('click', () => {
     const $li = event.target.closest('li');
     const { postId } = $li.dataset;
 
     if (postId) {
-      routeChage(`/post/${postId}`);
+      onClick(postId);
     }
   });
 }
