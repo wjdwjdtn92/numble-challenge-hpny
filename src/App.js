@@ -14,7 +14,6 @@ export default function App({ $target }) {
     const { pathname } = location;
     $main.innerHTML = '';
 
-    console.log({ pathname });
     if (pathname === '/') {
       header.setState(false);
       new PostListPage({ $target: $main });
