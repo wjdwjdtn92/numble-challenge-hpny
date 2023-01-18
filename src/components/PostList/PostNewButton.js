@@ -14,8 +14,8 @@ export default function PostNewButton({ $target, onClick }) {
       attributes: {
         className: 'button',
         ariaLabel: '새 글 작성하기 버튼',
+        onclick: onClick,
       },
-      onClick: onClick,
     });
   };
 
