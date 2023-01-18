@@ -6,8 +6,10 @@ export default function HeaderBackButton({ $target }) {
   $target.appendChild($button);
 
   this.render = () => {
-    $button.innerHTML = `<img src=${Icon} alt="뒤로가기 이미지"/>`;
-    console.log($button);
+    $button.insertAdjacentHTML(
+      'beforeend',
+      `<img src=${Icon} alt="뒤로가기 이미지"/>`,
+    );
   };
 
   this.render();

@@ -1,18 +1,11 @@
-import Component from '../lib/Component';
+export default function Button({ $target, $children = '', attributes = {} }) {
+  const $button = document.createElement('button');
+  Object.assign($button, attributes);
 
-export default function Button({
-  $target,
-  onClick,
-  $children = '',
-  attributes = {},
-}) {
-  const tag = 'button';
-
-  Component({
-    $target,
-    $children,
-    attributes,
-    onClick,
-    tag,
-  });
+  if ($children instanceof HTMLElement) {
+    $button.append($children);
+  } else {
+    $button.insertAdjacentHTML('beforeend', $children);
+  }
+  $target.appendChild($button);
 }

@@ -11,11 +11,14 @@ export default function HeaderNav({ $target, props }) {
       new HeaderBackButton({ $target: $nav });
     }
 
-    $nav.innerHTML += `
+    $nav.insertAdjacentHTML(
+      'beforeend',
+      `
       <h1 class="title">
         HPNY 2023
       </h1>
-    `;
+    `,
+    );
   };
 
   this.render();

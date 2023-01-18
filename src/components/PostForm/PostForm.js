@@ -1,4 +1,3 @@
-import Component from '../../lib/Component';
 import Button from '../../UI/Button';
 
 export default function UploadPostForm({ $target, onClick, onSubmit }) {
@@ -19,82 +18,58 @@ export default function UploadPostForm({ $target, onClick, onSubmit }) {
   this.render = () => {
     new Button({
       $target: $form,
-      $children: '랜덤 이미지 추가하기',
       attributes: {
         className: 'button',
+        textContent: '랜덤 이미지 추가하기',
         ariaLabel: '랜덤 이미지 추가 버튼',
         type: 'button',
-      },
-      onClick: onClick,
-    });
-
-    new Component({
-      $target: $form,
-      tag: 'label',
-      attributes: {
-        for: 'post-upload-form__input',
-      },
-      $children: '제목',
-    });
-
-    new Component({
-      $target: $form,
-      tag: 'input',
-      attributes: {
-        className: 'title',
-        name: 'title',
-        id: 'post-upload-form__input-title',
-        placeholder: '글 제목을 입력해주세요',
-        type: 'text',
-        required: true,
+        onclick: onClick,
       },
     });
 
-    new Component({
-      $target: $form,
-      tag: 'label',
-      attributes: {
-        for: 'post-upload-form__input-content',
-      },
-      $children: '내용',
-    });
-
-    new Component({
-      $target: $form,
-      tag: 'textarea',
-      attributes: {
-        className: 'content',
-        name: 'content',
-        id: 'post-upload-form__input-content',
-        placeholder: '글 내용을 입력해주세요',
-        required: true,
-      },
-    });
+    $form.insertAdjacentHTML(
+      'beforeend',
+      `<label>제목</label>
+       <input
+        class="title"
+        name="title"
+        id="post-upload-form__input-title"
+        placeholder="글 제목을 입력해주세요"
+        type="text"
+        required>
+      <label>내용</label>
+      <textarea
+        class="content"
+        name="content"
+        id="post-upload-form__input-content"
+        placeholder="글 내용을 입력해주세요"
+        required
+      ></textarea>`,
+    );
 
     new Button({
       $target: $form,
-      $children: '등록하기',
       attributes: {
         className: 'button',
+        textContent: '등록하기',
         ariaLabel: '등록하기 버튼',
         type: 'submit',
-      },
-      onClick: (event) => {
-        event.preventDefault();
+        onclick: (event) => {
+          event.preventDefault();
 
-        console.log($form);
-        const formData = new FormData($form);
+          const formData = new FormData($form);
 
-        for (const value of formData.values()) {
-          if (value.trim().length === 0) {
-            return;
+          for (const value of formData.values()) {
+            if (value.trim().length === 0) {
+              return;
+            }
           }
-        }
-        // console.log(formData.get('title'));
-        onSubmit({
-          title: formData.get('title'),
-          content: formData.get('content'),
-        });
+
+          onSubmit({
+            title: formData.get('title'),
+            content: formData.get('content'),
+          });
+        },
       },
     });
   };
