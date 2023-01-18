@@ -9,12 +9,20 @@ export async function readPostList() {
     return [];
   }
 
-  console.log(res.data.posts);
   return res.data.posts;
 }
 
+export async function readPost(postId) {
+  const res = await request(`${API_ENDPOINT}/post/${postId}`);
+
+  if (!res.success) {
+    return;
+  }
+
+  return res.data;
+}
+
 export async function createPost(data) {
-  console.log(data);
   return await request(`${API_ENDPOINT}/post`, {
     method: 'POST',
     headers: {
