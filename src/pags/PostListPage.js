@@ -1,6 +1,7 @@
-import dumy_data from '../assets/data/dumy.js';
+// import dumy_data from '../assets/data/dumy.js';
 import PostList from '../components/PostList/PostList.js';
 import PostNewButton from '../components/PostList/PostNewButton.js';
+import { readPostList } from '../lib/postsApi.js';
 import { routeChage } from '../router.js';
 
 export default function PostListPage({ $target }) {
@@ -16,8 +17,8 @@ export default function PostListPage({ $target }) {
   };
 
   this.getPosts = async () => {
-    // const data = await getPostList();
-    const data = dumy_data;
+    const data = await readPostList();
+    // const data = dumy_data;
 
     this.setState(data);
   };
