@@ -2,8 +2,9 @@
   width: 100%;
   padding: 8px;
   display: flex;
-  position: relative;
+  position: sticky;
   height: 40px;
+  bottom: 25px;
 }
 
 .post-comment-form__input {
