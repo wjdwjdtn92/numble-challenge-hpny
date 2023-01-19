@@ -4,11 +4,12 @@ import PostEditPage from './pags/postEditPage.js';
 import PostListPage from './pags/PostListPage.js';
 import PostUploadPage from './pags/PostUploadPage.js';
 import { router } from './router.js';
+import classes from './App.module.css';
 
 export default function App({ $target }) {
   const header = new Header({ $target, initialState: false });
   const $main = document.createElement('main');
-  $main.className = 'main';
+  $main.className = classes.main;
   $target.appendChild($main);
 
   this.route = () => {
