@@ -15,7 +15,7 @@ export async function readPostList() {
 export async function readPost(postId) {
   const res = await request(`${API_ENDPOINT}/post/${postId}`);
 
-  if (!res.success) {
+  if (!res || !res.success) {
     return;
   }
 
