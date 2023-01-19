@@ -13,11 +13,12 @@ module.exports = {
     publicPath: '/',
   },
   // 번들링 모드 설정
-  mode: 'development',
+  // mode: 'development',
+  mode: 'production',
   target: 'web',
   devServer: {
     static: {
-      directory: path.resolve(__dirname, 'dist'),
+      directory: path.resolve(__dirname, 'docs'),
     },
     hot: true,
     historyApiFallback: {
