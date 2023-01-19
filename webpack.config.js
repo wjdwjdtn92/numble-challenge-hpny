@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'docs'),
     // 빌드(컴파일, 번들링 등) 결과 파일 브라우저 캐싱(Cachinig)
-    filename: 'bundle.[contenthash].js',
+    filename: 'bundle.js',
     publicPath: '/',
   },
   // 번들링 모드 설정
