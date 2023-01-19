@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'docs'),
     // 빌드(컴파일, 번들링 등) 결과 파일 브라우저 캐싱(Cachinig)
     filename: 'bundle.[contenthash].js',
     publicPath: '/',
