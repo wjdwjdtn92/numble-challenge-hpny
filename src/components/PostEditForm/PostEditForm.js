@@ -1,13 +1,13 @@
 import Button from '../../UI/Button';
 
 export default function PostEditForm({ $target, props, onSubmit }) {
-  const $form = document.createElement('Form');
-  $form.className = 'post-edit-form';
-  $target.appendChild($form);
+  this.$element = document.createElement('Form');
+  this.$element.className = 'post-edit-form';
+  $target.appendChild(this.$element);
   console.log(props, 'props');
 
   this.render = () => {
-    $form.insertAdjacentHTML(
+    this.$element.insertAdjacentHTML(
       'beforeend',
       `
       <img src="${props.image}" />
@@ -32,7 +32,7 @@ export default function PostEditForm({ $target, props, onSubmit }) {
     );
 
     new Button({
-      $target: $form,
+      $target: this.$element,
       attributes: {
         className: 'button',
         textContent: '수정하기',
@@ -41,7 +41,7 @@ export default function PostEditForm({ $target, props, onSubmit }) {
         onclick: (event) => {
           event.preventDefault();
 
-          const formData = new FormData($form);
+          const formData = new FormData(this.$element);
 
           for (const value of formData.values()) {
             if (value.trim().length === 0) {

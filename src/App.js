@@ -27,6 +27,7 @@ export default function App({ $target }) {
 
     if (pathname.includes('/post/')) {
       header.setState(true);
+      console.log(pathname);
       new PostDetailPage({
         $target: $main.$element,
         postId: pathname.split('/post/')[1],
@@ -36,7 +37,6 @@ export default function App({ $target }) {
 
     if (pathname.includes('/edit/')) {
       header.setState(true);
-      console.log('edit');
       new PostEditPage({
         $target: $main.$element,
         postId: pathname.split('/edit/')[1],

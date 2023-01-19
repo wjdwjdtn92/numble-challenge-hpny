@@ -83,6 +83,7 @@ export default function PostDetailPage({ $target, postId }) {
   this.render = () => {
     (this.getPostDetail = async () => {
       const data = await readPost(postId);
+      console.log('data', data);
       this.setState(data);
     })();
   };
