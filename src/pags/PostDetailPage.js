@@ -1,0 +1,91 @@
+import PostCommentForm from '../components/PostComments/PostCommentForm.js';
+import PostComments from '../components/PostComments/PostComments.js';
+import PostDetail from '../components/PostDetail/PostDetail.js';
+import classes from './PostDetailPage.module.css';
+
+import {
+  createComment,
+  deleteComment,
+  deletePost,
+  readPost,
+} from '../lib/postsApi.js';
+import { routeChage } from '../router.js';
+
+export default function PostDetailPage({ $target, postId }) {
+  this.state = {
+    post: {},
+    comments: [],
+  };
+  this.$element = document.createElement('section');
+  this.$element.className = classes['post-detail-section'];
+  $target.appendChild(this.$element);
+
+  this.setState = (nextState) => {
+    this.state = {
+      ...this.state,
+      ...nextState,
+    };
+
+    console.log('aaaaaa');
+    postDetail.setState(this.state.post);
+    postComments.setState(this.state.comments);
+  };
+
+  const postDetail = new PostDetail({
+    $target: this.$element,
+    initialState: this.state.post,
+    onEdit: async (postId) => {
+      routeChage(`/edit/${postId}`);
+    },
+    onDelete: async (postId) => {
+      const response = await deletePost(postId);
+
+      if (response.code !== 200) {
+        console.log('error');
+        return;
+      }
+
+      this.render();
+    },
+  });
+
+  const postComments = new PostComments({
+    $target: this.$element,
+    initialState: this.state.comments,
+    onDelete: async (commentId) => {
+      const response = await deleteComment(commentId);
+
+      if (response.code !== 200) {
+        console.log('error');
+        return;
+      }
+
+      this.render();
+    },
+  });
+
+  new PostCommentForm({
+    $target: this.$element,
+    onSubmit: async (data) => {
+      console.log(data);
+      const response = await createComment(postId, data);
+      console.log(response);
+
+      if (response.code !== 201) {
+        console.log('error');
+        return;
+      }
+
+      this.render();
+    },
+  });
+
+  this.render = () => {
+    (this.getPostDetail = async () => {
+      const data = await readPost(postId);
+      this.setState(data);
+    })();
+  };
+
+  this.render();
+}
