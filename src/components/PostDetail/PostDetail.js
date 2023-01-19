@@ -1,14 +1,17 @@
 import classes from './PostDetail.module.css';
 
-export default function PostDetail({ $target, initialState, onEdit }) {
+export default function PostDetail({
+  $target,
+  initialState,
+  onEdit,
+  onDelete,
+}) {
   this.state = initialState;
   this.$element = document.createElement('article');
   this.$element.className = classes['post-detail'];
   $target.appendChild(this.$element);
 
   this.setState = (newState) => {
-    console.log('123', this.state, newState);
-
     for (const key in newState) {
       if (this.state[key] !== newState[key]) {
         this.state = {
@@ -81,7 +84,7 @@ export default function PostDetail({ $target, initialState, onEdit }) {
     }
 
     if ($button.id === 'post-delete-button') {
-      onEdit(this.state.postId);
+      onDelete(this.state.postId);
       return;
     }
   });
