@@ -1,0 +1,27 @@
+.header {
+  padding: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.header__nav-title {
+  font-size: 32px;
+  justify-self: center;
+
+  cursor: pointer;
+}
+
+.header__nav-back-button {
+  position: absolute;
+  left: 0;
+}
