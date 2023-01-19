@@ -1,11 +1,10 @@
 import PostForm from '../components/PostForm/PostForm';
-import { createPost } from '../lib/postsApi';
 import { getRandomPhoto } from '../lib/unsplashApi';
 
 export default function PostUploadPage({ $target }) {
-  const $page = document.createElement('section');
-  $page.className = 'post-upload-section';
-  $target.appendChild($page);
+  this.$element = document.createElement('section');
+  this.$element.className = 'post-upload-section';
+  $target.appendChild(this.$element);
 
   this.state = {
     title: '',
@@ -18,8 +17,6 @@ export default function PostUploadPage({ $target }) {
       ...this.state,
       ...newState,
     };
-
-    console.log(this.state);
   };
 
   this.render = () => {

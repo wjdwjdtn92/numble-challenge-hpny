@@ -1,50 +1,35 @@
-// import dumy_data from '../assets/data/dumy.js';
 import PostList from '../components/PostList/PostList.js';
 import PostNewButton from '../components/PostList/PostNewButton.js';
 import { readPostList } from '../lib/postsApi.js';
 import { routeChage } from '../router.js';
+import classes from './PostListPage.module.css';
 
 export default function PostListPage({ $target }) {
   this.state = [];
-  const $page = document.createElement('section');
-  $page.className = 'post-list-section';
-  $target.appendChild($page);
+  this.$element = document.createElement('section');
+  this.$element.className = classes['post-list-section'];
+  $target.appendChild(this.$element);
 
-  this.setState = (nextState) => {
-    this.state = nextState;
-
+  this.setState = (newState) => {
+    this.state = [...newState];
     this.render();
   };
 
-  this.getPosts = async () => {
-    const data = await readPostList();
-    // const data = dumy_data;
-
-    this.setState(data);
-  };
-
-  const postList = new PostList({
-    $target: $page,
-    initialState: this.state,
-    onClick: (postId) => {
-      routeChage(`/post/${postId}`);
-    },
-  });
-
-  new PostNewButton({
-    $target,
-    onClick: () => {
-      routeChage(`/upload`);
-    },
-  });
-
   this.render = () => {
-    // new PostList({ $target: $page, initialState: this.state });
-    // new PostNewButton({ $target });
-    postList.setState(this.state);
+    this.$element.innerHTML = '';
+
+    new PostList({
+      $target: this.$element,
+      props: this.state,
+      onClick: (postId) => {
+        routeChage(`/post/${postId}`);
+      },
+    });
   };
 
   this.render();
 
-  this.getPosts();
+  (this.getPosts = async () => {
+    this.setState(await readPostList());
+  })();
 }

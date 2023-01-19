@@ -1,6 +1,7 @@
 import PostCommentForm from '../components/PostComments/PostCommentForm.js';
 import PostComments from '../components/PostComments/PostComments.js';
 import PostDetail from '../components/PostDetail/PostDetail.js';
+import classes from './PostDetailPage.module.css';
 
 import {
   createComment,
@@ -15,9 +16,9 @@ export default function PostDetailPage({ $target, postId }) {
     post: {},
     comments: [],
   };
-  const $page = document.createElement('section');
-  $page.className = 'post-list-section';
-  $target.appendChild($page);
+  this.$element = document.createElement('section');
+  this.$element.className = classes['post-detail-section'];
+  $target.appendChild(this.$element);
 
   this.setState = (nextState) => {
     this.state = {
@@ -25,12 +26,13 @@ export default function PostDetailPage({ $target, postId }) {
       ...nextState,
     };
 
+    console.log('aaaaaa');
     postDetail.setState(this.state.post);
     postComments.setState(this.state.comments);
   };
 
   const postDetail = new PostDetail({
-    $target: $page,
+    $target: this.$element,
     initialState: this.state.post,
     onEdit: async (postId) => {
       routeChage(`/edit/${postId}`);
@@ -48,7 +50,7 @@ export default function PostDetailPage({ $target, postId }) {
   });
 
   const postComments = new PostComments({
-    $target: $page,
+    $target: this.$element,
     initialState: this.state.comments,
     onDelete: async (commentId) => {
       const response = await deleteComment(commentId);
@@ -63,7 +65,7 @@ export default function PostDetailPage({ $target, postId }) {
   });
 
   new PostCommentForm({
-    $target: $page,
+    $target: this.$element,
     onSubmit: async (data) => {
       console.log(data);
       const response = await createComment(postId, data);
@@ -81,7 +83,6 @@ export default function PostDetailPage({ $target, postId }) {
   this.render = () => {
     (this.getPostDetail = async () => {
       const data = await readPost(postId);
-      console.log(data);
       this.setState(data);
     })();
   };

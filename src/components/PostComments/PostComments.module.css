@@ -1,0 +1,26 @@
+.post-comments {
+  width: 100%;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.post-comment {
+  display: flex;
+  padding: 8px;
+}
+
+.post-comment__content {
+  flex: 1 1 0;
+  font-size: 16px;
+}
+
+.post-comment__remove-button {
+  width: 45px;
+  height: 28px;
+  border-radius: 5px;
+  /* outline: none; */
+  border: 0;
+  background-color: rgb(134, 207, 249);
+}

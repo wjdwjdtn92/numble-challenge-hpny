@@ -1,11 +1,14 @@
+import classes from './Button.module.css';
+
 export default function Button({ $target, $children = '', attributes = {} }) {
-  const $button = document.createElement('button');
-  Object.assign($button, attributes);
+  this.$element = document.createElement('button');
+  Object.assign(this.$element, attributes);
+  this.$element.classList.add(classes.button);
 
   if ($children instanceof HTMLElement) {
-    $button.append($children);
+    this.$element.append($children);
   } else {
-    $button.insertAdjacentHTML('beforeend', $children);
+    this.$element.insertAdjacentHTML('beforeend', $children);
   }
-  $target.appendChild($button);
+  $target.appendChild(this.$element);
 }

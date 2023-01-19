@@ -1,0 +1,7 @@
+.post-new-button {
+  position: fixed;
+  width: calc(100% - 8px - 8px); /* 패딩만큼 제거 */
+
+  bottom: 16px;
+  /* left: 0; */
+}

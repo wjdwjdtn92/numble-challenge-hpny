@@ -1,39 +1,55 @@
+import classes from './PostComments.module.css';
+
 export default function PostComments({ $target, initialState, onDelete }) {
   this.state = initialState;
-  const $PostComment = document.createElement('ul');
-  $PostComment.className = 'post-detail';
-  $target.appendChild($PostComment);
+  this.$element = document.createElement('ul');
+  this.$element.className = classes['post-comments'];
+  $target.appendChild(this.$element);
 
   this.setState = (newState) => {
-    if (newState === this.state) {
+    if (this.state.length !== newState.length) {
+      this.state = [...newState];
+
+      this.render();
       return;
     }
 
-    this.state = [...newState];
+    newState.forEach((comment, index) => {
+      if (
+        comment.content !== this.state[index].comment ||
+        comment.commentId !== this.state[index].commentId
+      ) {
+        this.state = [...newState];
 
-    this.render();
+        this.render();
+        return;
+      }
+    });
   };
 
   this.render = () => {
-    $PostComment.innerHTML = '';
+    this.$element.innerHTML = '';
 
     const comments = this.state
       .map((comment) => {
         return `
-        <li data-comment-id=${comment.commentId}>
-          <span>${comment.content}</span>
-          <button>삭제</button>
+        <li
+          class=${classes['post-comment']}
+          data-comment-id=${comment.commentId}
+        >
+          <h3 class=${classes['post-comment__content']}>${comment.content}</h3>
+          <button class=${classes['post-comment__remove-button']}>삭제</button>
         </li>
         `;
       })
       .join('');
 
-    $PostComment.insertAdjacentHTML('beforeend', comments);
+    this.$element.insertAdjacentHTML('beforeend', comments);
   };
 
   this.render();
 
-  $PostComment.addEventListener('click', (event) => {
+  this.$element.addEventListener('click', (event) => {
     const $li = event.target.closest('li');
     const { commentId } = $li.dataset;
 

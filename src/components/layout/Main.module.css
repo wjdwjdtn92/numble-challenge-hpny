@@ -1,9 +1,6 @@
-.wrapper {
+.main {
   padding: 8px;
   width: 100%;
-  max-width: calc(600px - 8px - 8px);
-  min-width: calc(373px -8px -8px);
-  height: 100%;
 
   display: flex;
   flex-direction: column;

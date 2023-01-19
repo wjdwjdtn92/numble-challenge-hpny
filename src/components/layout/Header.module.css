@@ -1,9 +1,16 @@
 .header {
+  flex: 0 0 60px;
+  background-color: #fff;
   padding: 8px;
   width: 100%;
+  min-width: 373px;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
+
+  position: sticky;
+  top: 0px;
 }
 
 .header__nav {
@@ -23,5 +30,30 @@
 
 .header__nav-back-button {
   position: absolute;
+  height: 100%;
   left: 0;
+  border: 0;
+  outline: 0;
+  color: black;
+  background-color: #fff;
+}
+
+.header__nav-back-button svg {
+  width: 45px;
+  height: 45px;
+  color: black;
+}
+
+.header__nav-new-button {
+  border: 0;
+  outline: 0;
+  position: absolute;
+  background-color: #fff;
+  right: 8px;
+}
+
+.header__nav-new-button svg {
+  width: 28px;
+  height: 28px;
+  color: black;
 }

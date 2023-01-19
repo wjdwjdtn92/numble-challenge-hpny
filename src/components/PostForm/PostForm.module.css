@@ -1,0 +1,27 @@
+.post-form {
+  width: 100%;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.post-comment-form__input {
+  border-radius: 10px;
+  height: 40px;
+  flex: 1 1 0;
+  padding: 8px 32px 8px 8px;
+}
+
+.post-form__button {
+}
+
+.click-block {
+  background-color: rgb(181, 178, 178);
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.post-form__button {
+  height: 100px;
+}

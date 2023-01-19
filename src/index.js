@@ -1,4 +1,4 @@
 import App from './App.js';
-import './index.module.css';
+import './index.css';
 
 new App({ $target: document.querySelector('.app') });

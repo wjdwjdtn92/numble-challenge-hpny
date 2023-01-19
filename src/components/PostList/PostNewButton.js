@@ -1,10 +1,11 @@
 import newBtnImg from '../../assets/images/icon_new_btn.svg';
 import Button from '../../UI/Button';
+import classes from './PostNewButton.module.css';
 
 export default function PostNewButton({ $target, onClick }) {
   this.render = () => {
     const $children = `
-      <img src=${newBtnImg} alt="new post icon"/>
+      <img src=${newBtnImg} alt="작성하기 아이콘"/>
       새 글 작성하기
     `;
 
@@ -12,7 +13,7 @@ export default function PostNewButton({ $target, onClick }) {
       $target,
       $children,
       attributes: {
-        className: 'button',
+        className: classes['post-new-button'],
         ariaLabel: '새 글 작성하기 버튼',
         onclick: onClick,
       },
