@@ -1,6 +1,6 @@
 import { request } from './api';
 
-export const API_ENDPOINT = 'api';
+export const API_ENDPOINT = '/api';
 
 export async function readPostList() {
   const res = await request(`${API_ENDPOINT}/posts`);
