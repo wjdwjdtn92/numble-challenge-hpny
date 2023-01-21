@@ -4,9 +4,8 @@ export default function PostEditForm({ $target, props, onSubmit }) {
   this.$element = document.createElement('Form');
   this.$element.className = 'post-edit-form';
   $target.appendChild(this.$element);
-  console.log(props, 'props');
 
-  this.render = () => {
+  this.render = async () => {
     this.$element.insertAdjacentHTML(
       'beforeend',
       `
@@ -19,8 +18,7 @@ export default function PostEditForm({ $target, props, onSubmit }) {
         placeholder="글 제목을 입력해주세요"
         type="text"
         value="${props.title}"
-        required>
-      </input>
+        required />
       <label>내용</label>
       <textarea
         class="content"
@@ -38,25 +36,27 @@ export default function PostEditForm({ $target, props, onSubmit }) {
         textContent: '수정하기',
         ariaLabel: '수정하기 버튼',
         type: 'submit',
-        onclick: (event) => {
-          event.preventDefault();
-
-          const formData = new FormData(this.$element);
-
-          for (const value of formData.values()) {
-            if (value.trim().length === 0) {
-              return;
-            }
-          }
-
-          onSubmit({
-            title: formData.get('title'),
-            content: formData.get('content'),
-          });
-        },
+        onclick: this.handleSubmit,
       },
     });
   };
 
   this.render();
+
+  this.handleSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(this.$element);
+
+    for (const value of formData.values()) {
+      if (value.trim().length === 0) {
+        return;
+      }
+    }
+
+    onSubmit({
+      title: formData.get('title'),
+      content: formData.get('content'),
+    });
+  };
 }

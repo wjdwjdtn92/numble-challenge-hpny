@@ -7,7 +7,7 @@ export default function PostItem({ $target, props }) {
   this.$element.className = classes['post-list__item'];
   $target.appendChild(this.$element);
 
-  this.render = () => {
+  this.render = async () => {
     if (!this.props) {
       return;
     }
@@ -15,7 +15,7 @@ export default function PostItem({ $target, props }) {
     const { postId, title, createdAt, content, image } = this.props;
     const date = new Date(createdAt).toLocaleDateString();
     this.$element.dataset.postId = postId;
-    // src=${image}
+
     new ImageSkeleton({
       $target: this.$element,
       attributes: {
@@ -36,6 +36,5 @@ export default function PostItem({ $target, props }) {
     `,
     );
   };
-  // <img class=${classes['post-list__item-image']} loading="lazy"/>
   this.render();
 }

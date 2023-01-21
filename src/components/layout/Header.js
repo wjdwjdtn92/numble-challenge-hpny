@@ -7,7 +7,7 @@ export default function Header({ $target, initialState }) {
   this.$element.className = classes.header;
   $target.appendChild(this.$element);
 
-  this.setState = (newState) => {
+  this.setState = async (newState) => {
     if (newState === this.state) {
       return;
     }
@@ -16,7 +16,7 @@ export default function Header({ $target, initialState }) {
     this.render();
   };
 
-  this.render = () => {
+  this.render = async () => {
     this.$element.innerHTML = '';
     this.$element.insertAdjacentHTML(
       'beforeend',
@@ -73,31 +73,27 @@ export default function Header({ $target, initialState }) {
   this.render();
 
   this.$element.addEventListener('click', (event) => {
-    const $nav = event.target.closest('nav');
-
-    console.log(event.target.closest('button'));
-    if (!$nav) {
-      return;
-    }
-
-    const $button = event.target.closest('button');
-
-    if ($button && $button.id === 'post-new-button') {
-      routeChage('/upload');
-
-      return;
-    }
-
-    if ($button && $button.id === 'back-button') {
-      history.back();
-      return;
-    }
-
     if (event.target.tagName === 'H1') {
       const { pathname } = location;
       if (pathname !== '/') {
         routeChage('/');
       }
+      return;
+    }
+
+    const $button = event.target.closest('button');
+
+    if (!$button) {
+      return;
+    }
+
+    if ($button.id === 'post-new-button') {
+      routeChage('/upload');
+      return;
+    }
+
+    if ($button.id === 'back-button') {
+      history.back();
       return;
     }
   });

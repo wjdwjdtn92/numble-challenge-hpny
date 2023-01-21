@@ -6,17 +6,7 @@ export default function PostForm({ $target, onClick, onSubmit }) {
   this.$element.className = classes['post-form'];
   $target.appendChild(this.$element);
 
-  this.setState = (newState) => {
-    // deep check
-    if (newState === this.state) {
-      return;
-    }
-
-    this.state = newState;
-    this.render();
-  };
-
-  this.render = () => {
+  this.render = async () => {
     new Button({
       $target: this.$element,
       attributes: {
@@ -67,7 +57,7 @@ export default function PostForm({ $target, onClick, onSubmit }) {
     });
   };
 
-  this.handleSubmit = (event) => {
+  this.handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(this.$element);

@@ -3,7 +3,7 @@ import Button from '../../UI/Button';
 import classes from './PostNewButton.module.css';
 
 export default function PostNewButton({ $target, onClick }) {
-  this.render = () => {
+  this.render = async () => {
     const $children = `
       <img src=${newBtnImg} alt="작성하기 아이콘"/>
       새 글 작성하기

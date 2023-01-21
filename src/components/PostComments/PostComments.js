@@ -6,7 +6,7 @@ export default function PostComments({ $target, initialState, onDelete }) {
   this.$element.className = classes['post-comments'];
   $target.appendChild(this.$element);
 
-  this.setState = (newState) => {
+  this.setState = async (newState) => {
     if (this.state.length !== newState.length) {
       this.state = [...newState];
 
@@ -33,13 +33,13 @@ export default function PostComments({ $target, initialState, onDelete }) {
     const comments = this.state
       .map((comment) => {
         return `
-        <li
-          class=${classes['post-comment']}
-          data-comment-id=${comment.commentId}
-        >
-          <h3 class=${classes['post-comment__content']}>${comment.content}</h3>
-          <button class=${classes['post-comment__remove-button']}>삭제</button>
-        </li>
+          <li
+            class=${classes['post-comment']}
+            data-comment-id=${comment.commentId}
+          >
+            <h3 class=${classes['post-comment__content']}>${comment.content}</h3>
+            <button class=${classes['post-comment__remove-button']}>삭제</button>
+          </li>
         `;
       })
       .join('');
@@ -53,10 +53,8 @@ export default function PostComments({ $target, initialState, onDelete }) {
     const $li = event.target.closest('li');
     const { commentId } = $li.dataset;
 
-    if ($li) {
-      if (event.target.tagName === 'BUTTON') {
-        onDelete(commentId);
-      }
+    if ($li && event.target.tagName === 'BUTTON') {
+      onDelete(commentId);
     }
   });
 }

@@ -11,7 +11,7 @@ export default function PostDetail({
   this.$element.className = classes['post-detail'];
   $target.appendChild(this.$element);
 
-  this.setState = (newState) => {
+  this.setState = async (newState) => {
     for (const key in newState) {
       if (this.state[key] !== newState[key]) {
         this.state = {
@@ -25,13 +25,13 @@ export default function PostDetail({
     }
   };
 
-  this.render = () => {
+  this.render = async () => {
     if (JSON.stringify(this.state) === '{}') {
       return;
     }
     this.$element.innerHTML = '';
 
-    const { postId, title, content, image, createdAt } = this.state;
+    const { title, content, image, createdAt } = this.state;
     const date = new Date(createdAt).toLocaleDateString();
 
     this.$element.insertAdjacentHTML(

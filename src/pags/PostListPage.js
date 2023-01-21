@@ -5,17 +5,12 @@ import { routeChage } from '../router.js';
 export default function PostListPage({ $target }) {
   this.state = [];
 
-  this.setState = (newState) => {
-    this.state = [...newState];
-    this.render();
-  };
-
-  this.render = () => {
+  this.render = async () => {
     $target.innerHTML = '';
 
     new PostList({
       $target,
-      props: this.state,
+      props: await readPostList(),
       onClick: (postId) => {
         routeChage(`/post/${postId}`);
       },
@@ -23,8 +18,4 @@ export default function PostListPage({ $target }) {
   };
 
   this.render();
-
-  (this.getPosts = async () => {
-    this.setState(await readPostList());
-  })();
 }

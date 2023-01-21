@@ -4,7 +4,7 @@ export default function Section({ $target }) {
   this.$element = document.createElement('section');
   this.$element.className = classes['section'];
 
-  this.render = () => {
+  this.render = async () => {
     $target.appendChild(this.$element);
   };
 

@@ -5,7 +5,7 @@ export default function PostCommentForm({ $target, onSubmit }) {
   this.$element.className = classes['post-comment-form'];
   $target.appendChild(this.$element);
 
-  this.render = () => {
+  this.render = async () => {
     this.$element.innerHTML = '';
 
     this.$element.insertAdjacentHTML(

@@ -16,7 +16,7 @@ export default function PostDetailPage({ $target, postId }) {
     comments: [],
   };
 
-  this.setState = (nextState) => {
+  this.setState = async (nextState) => {
     this.state = {
       ...this.state,
       ...nextState,
@@ -73,11 +73,8 @@ export default function PostDetailPage({ $target, postId }) {
     },
   });
 
-  this.render = () => {
-    (this.getPostDetail = async () => {
-      const data = await readPost(postId);
-      this.setState(data);
-    })();
+  this.render = async () => {
+    this.setState(await readPost(postId));
   };
 
   this.render();

@@ -9,14 +9,14 @@ export default function PostUploadPage({ $target }) {
     image: '',
   };
 
-  this.setState = (newState) => {
+  this.setState = async (newState) => {
     this.state = {
       ...this.state,
       ...newState,
     };
   };
 
-  this.render = () => {
+  this.render = async () => {
     new PostForm({
       $target,
       onClick: async () => {

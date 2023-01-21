@@ -5,7 +5,7 @@ import { routeChage } from '../router.js';
 export default function PostEditPage({ $target, postId }) {
   this.state = {};
 
-  this.setState = (newState) => {
+  this.setState = async (newState) => {
     if (newState === this.state) {
       return;
     }
