@@ -6,6 +6,7 @@ import PostUploadPage from './pags/PostUploadPage.js';
 import { router } from './router.js';
 import Main from './components/layout/Main.js';
 import classes from './App.module.css';
+import Section from './components/layout/section.js';
 
 export default function App({ $target }) {
   this.$element = document.createElement('div');
@@ -14,22 +15,23 @@ export default function App({ $target }) {
 
   const header = new Header({ $target: this.$element, initialState: false });
   const $main = new Main({ $target: this.$element });
+  const $section = new Section({ $target: $main.$element });
+  console.log($section);
 
   this.route = () => {
     const { pathname } = location;
-    $main.$element.innerHTML = '';
+    $section.$element.innerHTML = '';
 
     if (pathname === '/') {
       header.setState(false);
-      new PostListPage({ $target: $main.$element });
+      new PostListPage({ $target: $section.$element });
       return;
     }
 
     if (pathname.includes('/post/')) {
       header.setState(true);
-      console.log(pathname);
       new PostDetailPage({
-        $target: $main.$element,
+        $target: $section.$element,
         postId: pathname.split('/post/')[1],
       });
       return;
@@ -38,7 +40,7 @@ export default function App({ $target }) {
     if (pathname.includes('/edit/')) {
       header.setState(true);
       new PostEditPage({
-        $target: $main.$element,
+        $target: $section.$element,
         postId: pathname.split('/edit/')[1],
       });
       return;
@@ -46,11 +48,11 @@ export default function App({ $target }) {
 
     if (pathname.includes('/upload')) {
       header.setState(true);
-      new PostUploadPage({ $target: $main.$element });
+      new PostUploadPage({ $target: $section.$element });
       return;
     }
 
-    $target.innerHTML = 'page not nound';
+    $section.innerHTML = 'page not nound';
   };
 
   router(this.route);

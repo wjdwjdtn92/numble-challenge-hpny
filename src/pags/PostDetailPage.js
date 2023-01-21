@@ -1,7 +1,6 @@
 import PostCommentForm from '../components/PostComments/PostCommentForm.js';
 import PostComments from '../components/PostComments/PostComments.js';
 import PostDetail from '../components/PostDetail/PostDetail.js';
-import classes from './PostDetailPage.module.css';
 
 import {
   createComment,
@@ -16,9 +15,6 @@ export default function PostDetailPage({ $target, postId }) {
     post: {},
     comments: [],
   };
-  this.$element = document.createElement('section');
-  this.$element.className = classes['post-detail-section'];
-  $target.appendChild(this.$element);
 
   this.setState = (nextState) => {
     this.state = {
@@ -26,13 +22,12 @@ export default function PostDetailPage({ $target, postId }) {
       ...nextState,
     };
 
-    console.log('aaaaaa');
     postDetail.setState(this.state.post);
     postComments.setState(this.state.comments);
   };
 
   const postDetail = new PostDetail({
-    $target: this.$element,
+    $target,
     initialState: this.state.post,
     onEdit: async (postId) => {
       routeChage(`/edit/${postId}`);
@@ -50,7 +45,7 @@ export default function PostDetailPage({ $target, postId }) {
   });
 
   const postComments = new PostComments({
-    $target: this.$element,
+    $target,
     initialState: this.state.comments,
     onDelete: async (commentId) => {
       const response = await deleteComment(commentId);
@@ -65,11 +60,9 @@ export default function PostDetailPage({ $target, postId }) {
   });
 
   new PostCommentForm({
-    $target: this.$element,
+    $target,
     onSubmit: async (data) => {
-      console.log(data);
       const response = await createComment(postId, data);
-      console.log(response);
 
       if (response.code !== 201) {
         console.log('error');
@@ -83,7 +76,6 @@ export default function PostDetailPage({ $target, postId }) {
   this.render = () => {
     (this.getPostDetail = async () => {
       const data = await readPost(postId);
-      console.log('data', data);
       this.setState(data);
     })();
   };
