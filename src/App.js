@@ -15,7 +15,10 @@ export default function App({ $target }) {
   this.$element.className = classes.wrapper;
   $target.appendChild(this.$element);
 
-  const header = new Header({ $target: this.$element, initialState: false });
+  const header = new Header({
+    $target: this.$element,
+    initialState: { isShowBackButton: false, isShowAddButton: true },
+  });
   const main = new Main({ $target: this.$element });
   const section = new Section({ $target: main.$element });
 
@@ -24,13 +27,13 @@ export default function App({ $target }) {
     section.$element.innerHTML = '';
 
     if (pathname === '/') {
-      header.setState(false);
+      header.setState({ isShowBackButton: false, isShowAddButton: true });
       new PostListPage({ $target: section.$element });
       return;
     }
 
     if (pathname.includes('/post/')) {
-      header.setState(true);
+      header.setState({ isShowBackButton: true, isShowAddButton: true });
       new PostDetailPage({
         $target: section.$element,
         postId: pathname.split('/post/')[1],
@@ -39,7 +42,7 @@ export default function App({ $target }) {
     }
 
     if (pathname.includes('/edit/')) {
-      header.setState(true);
+      header.setState({ isShowBackButton: true, isShowAddButton: false });
       new PostEditPage({
         $target: section.$element,
         postId: pathname.split('/edit/')[1],
@@ -48,7 +51,7 @@ export default function App({ $target }) {
     }
 
     if (pathname.includes('/upload')) {
-      header.setState(true);
+      header.setState({ isShowBackButton: true, isShowAddButton: false });
       new PostUploadPage({ $target: section.$element });
       return;
     }

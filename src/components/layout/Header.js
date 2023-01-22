@@ -23,7 +23,7 @@ export default function Header({ $target, initialState }) {
       `
       <nav class=${classes['header__nav']}>
         ${
-          this.state
+          this.state.isShowBackButton
             ? `
             <button class=${classes['header__nav-back-button']} id="back-button">
                 <svg
@@ -45,26 +45,32 @@ export default function Header({ $target, initialState }) {
         <h1 class=${classes['header__nav-title']}>
           HPNY 2023
         </h1>
-        <button 
-          class=${classes['header__nav-new-button']}  
-          id="post-new-button"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2.667"
-              d="M20 1.333H4A2.667 2.667 0 0 0 1.333 4v16A2.667 2.667 0 0 0 4 22.667h16A2.667 2.667 0 0 0 22.667 20V4A2.667 2.667 0 0 0 20 1.333ZM8 12h8m-4-4v8"
-            />
-          </svg>
-        </button>
+        ${
+          this.state.isShowAddButton
+            ? `
+            <button 
+              class=${classes['header__nav-new-button']}  
+              id="post-new-button"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.667"
+                  d="M20 1.333H4A2.667 2.667 0 0 0 1.333 4v16A2.667 2.667 0 0 0 4 22.667h16A2.667 2.667 0 0 0 22.667 20V4A2.667 2.667 0 0 0 20 1.333ZM8 12h8m-4-4v8"
+                />
+              </svg>
+            </button>
+            `
+            : ''
+        }
       </nav>
     `,
     );
