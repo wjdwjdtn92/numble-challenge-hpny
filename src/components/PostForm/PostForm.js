@@ -1,4 +1,4 @@
-import Button from '../../UI/Button';
+import Button from '../UI/Button';
 import classes from './PostForm.module.css';
 import ImageNotFound from '../../assets/images/image_not_found.png';
 

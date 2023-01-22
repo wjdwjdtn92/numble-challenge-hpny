@@ -1,5 +1,5 @@
 import newBtnImg from '../../assets/images/icon_new_btn.svg';
-import Button from '../../UI/Button';
+import Button from '../UI/Button';
 import classes from './PostNewButton.module.css';
 
 export default function PostNewButton({ $target, onClick }) {
