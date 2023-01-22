@@ -1,4 +1,3 @@
-import ImageSkeleton from '../../UI/ImageSkeleton';
 import classes from './PostItem.module.css';
 
 export default function PostItem({ $target, props }) {
@@ -16,18 +15,14 @@ export default function PostItem({ $target, props }) {
     const date = new Date(createdAt).toLocaleDateString();
     this.$element.dataset.postId = postId;
 
-    new ImageSkeleton({
-      $target: this.$element,
-      attributes: {
-        className: classes['image-size'],
-      },
-      dataSrc: image,
-      dataAlt: title,
-    });
-
     this.$element.insertAdjacentHTML(
       'beforeend',
       `
+      <div 
+        class="placeholder image-size-110"
+        data-src=${image}
+        data-alt=${title}      
+      ></div>
       <div class="${classes['post-list__item-container']}"> 
         <h3 class=${classes['post-list__item-title']}>${title}</h3>
         <p class = ${classes['post-list__item-content']}>${content}</p>

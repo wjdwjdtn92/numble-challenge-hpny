@@ -1,3 +1,4 @@
+import { imageLoad } from '../../lib/image';
 import classes from './PostDetail.module.css';
 
 export default function PostDetail({
@@ -38,12 +39,11 @@ export default function PostDetail({
       'beforeend',
       `
       <div class=${classes['post-detail__info']}>
-        <img
-          src="${image}" 
-          alt="${title}" 
-          class=${classes['post-detail__info-img']}
-          loading="lazy"
-        />
+        <div 
+          class="placeholder image-size-320"
+          data-src=${image}
+          data-alt=${title}      
+        ></div>
         <div class=${classes['post-detail__info-desc']}>
           <div class=${classes['post-detail__info-header']}>
             <h2 class=${classes['post-detail__info-title']}>${title}</h2>
@@ -67,6 +67,8 @@ export default function PostDetail({
       <hr class=${classes['hr']}>
       `,
     );
+
+    imageLoad(`${classes['post-detail__info-img']} image-size-320 `);
   };
 
   this.render();
