@@ -29,7 +29,7 @@ export default function PostCommentForm({ $target, onSubmit }) {
 
   this.render();
 
-  this.$element.addEventListener('submit', (event) => {
+  this.$element.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const formData = new FormData(this.$element);
@@ -40,8 +40,11 @@ export default function PostCommentForm({ $target, onSubmit }) {
       }
     }
 
-    onSubmit({
+    await onSubmit({
       content: formData.get('post-comment-input'),
     });
+
+    const $input = event.target.querySelector('input');
+    $input.value = '';
   });
 }
