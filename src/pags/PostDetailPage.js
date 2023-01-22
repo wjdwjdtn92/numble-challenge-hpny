@@ -12,7 +12,7 @@ import { routeChage } from '../router.js';
 
 export default function PostDetailPage({ $target, postId }) {
   this.state = {
-    post: {},
+    post: { title: '', content: '', image: '', createdAt: '' },
     comments: [],
   };
 
