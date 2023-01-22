@@ -1,15 +1,16 @@
-import PostEditForm from '../components/PostEditForm/PostEditForm.js';
+import PostForm from '../components/PostForm/PostForm.js';
 import { readPost, uploadPost } from '../lib/postsApi.js';
+import { getRandomPhoto } from '../lib/unsplashApi.js';
 import { routeChage } from '../router.js';
 
 export default function PostEditPage({ $target, postId }) {
-  this.state = {};
+  this.state = {
+    title: '',
+    content: '',
+    image: '',
+  };
 
   this.setState = async (newState) => {
-    if (newState === this.state) {
-      return;
-    }
-
     this.state = {
       ...this.state,
       ...newState,
@@ -25,9 +26,23 @@ export default function PostEditPage({ $target, postId }) {
 
     this.setState(data.post);
 
-    new PostEditForm({
+    new PostForm({
       $target,
-      props: this.state,
+      props: {
+        ...this.state,
+        action: 'edit',
+      },
+      onClick: async (event) => {
+        event.target.classList.add('click-block');
+
+        const response = await getRandomPhoto();
+        const image = response[0].urls.small;
+        this.setState({ image });
+
+        event.target.classList.remove('click-block');
+        event.target.parentNode.querySelector('#post-image').src = image;
+      },
+
       onSubmit: async (data) => {
         const response = await uploadPost(this.state.postId, data);
 

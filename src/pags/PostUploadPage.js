@@ -19,9 +19,17 @@ export default function PostUploadPage({ $target }) {
   this.render = async () => {
     new PostForm({
       $target,
-      onClick: async () => {
+      props: { ...this.state, action: 'create' },
+      onClick: async (event) => {
+        event.target.classList.add('click-block');
+
         const response = await getRandomPhoto();
-        this.setState({ image: response[0].urls.small });
+        const image = response[0].urls.small;
+        this.setState({ image });
+
+        event.target.classList.remove('click-block');
+        event.target.parentNode.querySelector('#post-image').src = image;
+        event.target.textContent = '이미지 변경하기';
       },
       onSubmit: async (data) => {
         this.setState({ ...data });
