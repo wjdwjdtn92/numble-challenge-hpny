@@ -1,8 +1,8 @@
-import classes from './Section.module.css';
+import style from './Section.module.css';
 
 export default function Section({ $target, iniatailState }) {
   this.$element = document.createElement('section');
-  this.$element.className = classes['section'];
+  this.$element.className = style['section'];
   this.sate = iniatailState;
   $target.appendChild(this.$element);
 

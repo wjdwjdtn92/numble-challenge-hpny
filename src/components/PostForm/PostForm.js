@@ -1,12 +1,12 @@
 import Button from '../UI/Button';
-import classes from './PostForm.module.css';
+import style from './PostForm.module.css';
 import ImageNotFound from '../../assets/images/image_not_found.png';
 import ModalContent from '../Modal/ModalContent';
 
 export default function PostForm({ $target, props, onClick, onSubmit }) {
   this.props = props;
   this.$element = document.createElement('Form');
-  this.$element.className = classes['post-form'];
+  this.$element.className = style['post-form'];
   $target.appendChild(this.$element);
 
   const { title, content, image, action } = this.props;
@@ -19,7 +19,7 @@ export default function PostForm({ $target, props, onClick, onSubmit }) {
       'beforeend',
       `
       <img
-        class="image-size-320 ${classes['post-form__image']}"
+        class="image-size-320 ${style['post-form__image']}"
         src="${src}"
         id="post-image" 
         alt="업로드 이미지"
@@ -30,7 +30,7 @@ export default function PostForm({ $target, props, onClick, onSubmit }) {
     new Button({
       $target: this.$element,
       attributes: {
-        className: classes['post-form__button'],
+        className: style['post-form__button'],
         textContent: `랜덤 이미지 ${addButtonText}`,
         ariaLabel: `랜덤 이미지 ${addButtonText} 버튼`,
         type: 'button',
@@ -42,9 +42,9 @@ export default function PostForm({ $target, props, onClick, onSubmit }) {
       'beforeend',
       `
       <fieldset>
-        <label class=${classes['post-form__label']}>제목</label>
+        <label class=${style['post-form__label']}>제목</label>
         <input
-          class=${classes['post-form__input-title']}
+          class=${style['post-form__input-title']}
           name="title"
           id="post-upload-form__input-title"
           placeholder="글 제목을 입력해주세요"
@@ -57,7 +57,7 @@ export default function PostForm({ $target, props, onClick, onSubmit }) {
       <fieldset>
         <label>내용</label>
         <textarea
-          class=${classes['post-form__input-content']}
+          class=${style['post-form__input-content']}
           name="content"
           id="post-upload-form__input-content"
           placeholder="글 내용을 입력해주세요"
@@ -69,7 +69,7 @@ export default function PostForm({ $target, props, onClick, onSubmit }) {
     new Button({
       $target: this.$element,
       attributes: {
-        className: classes['post-form__button'],
+        className: style['post-form__button'],
         textContent: `${submitButtonText}하기`,
         ariaLabel: `${submitButtonText} 버튼`,
         type: 'submit',

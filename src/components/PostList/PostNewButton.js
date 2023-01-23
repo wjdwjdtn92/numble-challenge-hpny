@@ -1,6 +1,6 @@
 import newBtnImg from '../../assets/images/icon_new_btn.svg';
 import Button from '../../UI/Button';
-import classes from './PostNewButton.module.css';
+import style from './PostNewButton.module.css';
 
 export default function PostNewButton({ $target, onClick }) {
   this.render = async () => {
@@ -13,7 +13,7 @@ export default function PostNewButton({ $target, onClick }) {
       $target,
       $children,
       attributes: {
-        className: classes['post-new-button'],
+        className: style['post-new-button'],
         ariaLabel: '새 글 작성하기 버튼',
         onclick: onClick,
       },

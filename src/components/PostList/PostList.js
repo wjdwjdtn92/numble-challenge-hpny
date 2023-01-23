@@ -1,4 +1,4 @@
-import classes from './PostList.module.css';
+import style from './PostList.module.css';
 import postItemStyle from './PostItem.module.css';
 
 import PostItem from './PostItem';
@@ -7,7 +7,7 @@ import { imageLoad } from '../../lib/image';
 export default function PostList({ $target, props, onClick }) {
   this.props = props;
   this.$element = document.createElement('ul');
-  this.$element.className = classes['post-list'];
+  this.$element.className = style['post-list'];
   $target.appendChild(this.$element);
 
   this.render = async () => {

@@ -1,9 +1,9 @@
-import classes from './PostComments.module.css';
+import style from './PostComments.module.css';
 
 export default function PostComments({ $target, initialState, onDelete }) {
   this.state = initialState;
   this.$element = document.createElement('ul');
-  this.$element.className = classes['post-comments'];
+  this.$element.className = style['post-comments'];
   $target.appendChild(this.$element);
 
   this.setState = async (newState) => {
@@ -34,11 +34,11 @@ export default function PostComments({ $target, initialState, onDelete }) {
       .map((comment) => {
         return `
           <li
-            class=${classes['post-comment']}
+            class=${style['post-comment']}
             data-comment-id=${comment.commentId}
           >
-            <h3 class=${classes['post-comment__content']}>${comment.content}</h3>
-            <button aria-label="삭제 버튼" class=${classes['post-comment__remove-button']}>삭제</button>
+            <h3 class=${style['post-comment__content']}>${comment.content}</h3>
+            <button aria-label="삭제 버튼" class=${style['post-comment__remove-button']}>삭제</button>
           </li>
         `;
       })

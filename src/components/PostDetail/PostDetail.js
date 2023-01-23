@@ -1,6 +1,6 @@
 import { imageLoad } from '../../lib/image';
 import ModalContent from '../Modal/ModalContent';
-import classes from './PostDetail.module.css';
+import style from './PostDetail.module.css';
 
 export default function PostDetail({
   $target,
@@ -10,7 +10,7 @@ export default function PostDetail({
 }) {
   this.state = initialState;
   this.$element = document.createElement('article');
-  this.$element.className = classes['post-detail'];
+  this.$element.className = style['post-detail'];
   $target.appendChild(this.$element);
 
   this.setState = async (newState) => {
@@ -39,43 +39,43 @@ export default function PostDetail({
     this.$element.insertAdjacentHTML(
       'beforeend',
       `
-      <div class=${classes['post-detail__info']}>
+      <div class=${style['post-detail__info']}>
         <div 
           class="placeholder image-size-320"
           data-src=${image}
           data-alt=${title}      
         ></div>
-        <div class=${classes['post-detail__info-desc']}>
-          <div class=${classes['post-detail__info-header']}>
-            <h3 class=${classes['post-detail__info-title']}>${title}</h3>
-            <span class=${classes['post-detail__info-date']}>
+        <div class=${style['post-detail__info-desc']}>
+          <div class=${style['post-detail__info-header']}>
+            <h3 class=${style['post-detail__info-title']}>${title}</h3>
+            <span class=${style['post-detail__info-date']}>
               ${date.slice(0, -1)}
             </span>
           </div>
-          <p class=${classes['post-detail__info-content']}>${content}</p>
+          <p class=${style['post-detail__info-content']}>${content}</p>
         </div>
       </div>
-      <div class=${classes['post-detail__button-container']}>
+      <div class=${style['post-detail__button-container']}>
         <button 
           id="post-edit-button"
-          class=${classes['post-detail__button']}
+          class=${style['post-detail__button']}
           aria-label="수정하기 버튼"
         >
           수정
         </button>
         <button 
           id="post-delete-button"
-          class=${classes['post-detail__button']}
+          class=${style['post-detail__button']}
           aria-label="삭제하기 버튼"
         >
           삭제
         </button>
       </div>
-      <hr class=${classes['hr']}>
+      <hr class=${style['hr']}>
       `,
     );
 
-    imageLoad(`${classes['post-detail__info-img']} image-size-320 `);
+    imageLoad(`${style['post-detail__info-img']} image-size-320 `);
   };
 
   this.render();

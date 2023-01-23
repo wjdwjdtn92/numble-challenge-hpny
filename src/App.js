@@ -8,11 +8,11 @@ import PostDetailPage from './pags/PostDetailPage.js';
 import PostUploadPage from './pags/PostUploadPage.js';
 
 import { router } from './router.js';
-import classes from './App.module.css';
+import style from './App.module.css';
 
 export default function App({ $target }) {
   this.$element = document.createElement('div');
-  this.$element.className = classes.wrapper;
+  this.$element.className = style.wrapper;
   $target.appendChild(this.$element);
 
   const header = new Header({

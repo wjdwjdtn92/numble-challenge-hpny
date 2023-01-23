@@ -1,10 +1,10 @@
 import { routeChage } from '../../router';
-import classes from './Header.module.css';
+import style from './Header.module.css';
 
 export default function Header({ $target, initialState }) {
   this.state = initialState;
   this.$element = document.createElement('header');
-  this.$element.className = classes.header;
+  this.$element.className = style.header;
   $target.appendChild(this.$element);
 
   this.setState = async (newState) => {
@@ -21,12 +21,12 @@ export default function Header({ $target, initialState }) {
     this.$element.insertAdjacentHTML(
       'beforeend',
       `
-      <nav class=${classes['header__nav']}>
+      <nav class=${style['header__nav']}>
         ${
           this.state.isShowBackButton
             ? `
             <button
-              class=${classes['header__nav-back-button']} 
+              class=${style['header__nav-back-button']} 
               id="back-button"
               aria-label="뒤로가기 버튼"
             >
@@ -46,14 +46,14 @@ export default function Header({ $target, initialState }) {
             `
             : ''
         }
-        <h1 class=${classes['header__nav-title']}>
+        <h1 class=${style['header__nav-title']}>
           HPNY 2023
         </h1>
         ${
           this.state.isShowAddButton
             ? `
             <button 
-              class=${classes['header__nav-new-button']}  
+              class=${style['header__nav-new-button']}  
               id="post-new-button"
               aria-label="게시판 글 작성하기 버튼"
             >

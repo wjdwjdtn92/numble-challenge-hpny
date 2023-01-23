@@ -1,9 +1,9 @@
-import classes from './PostItem.module.css';
+import style from './PostItem.module.css';
 
 export default function PostItem({ $target, props }) {
   this.props = props;
   this.$element = document.createElement('li');
-  this.$element.className = classes['post-list__item'];
+  this.$element.className = style['post-list__item'];
   $target.appendChild(this.$element);
 
   this.render = async () => {
@@ -23,11 +23,11 @@ export default function PostItem({ $target, props }) {
         data-src=${image}
         data-alt=${title}      
       ></div>
-      <div class="${classes['post-list__item-container']}"> 
-        <h3 class=${classes['post-list__item-title']}>${title}</h3>
-        <p class = ${classes['post-list__item-content']}>${content}</p>
+      <div class="${style['post-list__item-container']}"> 
+        <h3 class=${style['post-list__item-title']}>${title}</h3>
+        <p class = ${style['post-list__item-content']}>${content}</p>
       </div>
-      <div class=${classes['post-list__item-date']}>${date}</div>
+      <div class=${style['post-list__item-date']}>${date}</div>
     `,
     );
   };
