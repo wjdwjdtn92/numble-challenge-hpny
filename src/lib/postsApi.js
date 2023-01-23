@@ -1,7 +1,7 @@
 import { request } from './api';
 
-// export const API_ENDPOINT = '/api';
-export const API_ENDPOINT = 'http://43.201.103.199';
+export const API_ENDPOINT = '/api';
+// export const API_ENDPOINT = 'http://43.201.103.199';
 
 export async function readPostList() {
   const res = await request(`${API_ENDPOINT}/posts`);
