@@ -89,6 +89,7 @@ export default function PostForm({ $target, props, onClick, onSubmit }) {
       }
     }
 
+    console.log(window.modal);
     window.modal.classList.add('modal-show');
     window.modal.innerHTML = '';
     new ModalContent({
