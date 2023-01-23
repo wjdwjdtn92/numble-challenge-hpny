@@ -47,7 +47,7 @@ export default function PostDetail({
         ></div>
         <div class=${classes['post-detail__info-desc']}>
           <div class=${classes['post-detail__info-header']}>
-            <h2 class=${classes['post-detail__info-title']}>${title}</h2>
+            <h3 class=${classes['post-detail__info-title']}>${title}</h3>
             <span class=${classes['post-detail__info-date']}>
               ${date.slice(0, -1)}
             </span>
@@ -59,11 +59,17 @@ export default function PostDetail({
         <button 
           id="post-edit-button"
           class=${classes['post-detail__button']}
-        >수정</button>
+          aria-label="수정하기 버튼"
+        >
+          수정
+        </button>
         <button 
           id="post-delete-button"
           class=${classes['post-detail__button']}
-        >삭제</button>
+          aria-label="삭제하기 버튼"
+        >
+          삭제
+        </button>
       </div>
       <hr class=${classes['hr']}>
       `,

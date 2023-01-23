@@ -38,7 +38,7 @@ export default function PostComments({ $target, initialState, onDelete }) {
             data-comment-id=${comment.commentId}
           >
             <h3 class=${classes['post-comment__content']}>${comment.content}</h3>
-            <button class=${classes['post-comment__remove-button']}>삭제</button>
+            <button aria-label="삭제 버튼" class=${classes['post-comment__remove-button']}>삭제</button>
           </li>
         `;
       })

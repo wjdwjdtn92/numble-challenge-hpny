@@ -22,6 +22,7 @@ export default function PostForm({ $target, props, onClick, onSubmit }) {
         class="image-size-320 ${classes['post-form__image']}"
         src="${src}"
         id="post-image" 
+        alt="업로드 이미지"
       />
       `,
     );

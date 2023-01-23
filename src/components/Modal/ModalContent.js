@@ -22,6 +22,7 @@ export default function ModalContent({ $target, props, onCancel, onConfirm }) {
         type="button"
         class=${style['cancel-button']} 
         data-action="close"
+        aria-label="닫기 버튼"
       >
         &times
       </button>
@@ -30,8 +31,22 @@ export default function ModalContent({ $target, props, onCancel, onConfirm }) {
        <p>${content}</p>
     </div>
     <div class=${style['modal-footer']}>
-      <button class="${style['modal-button']}" type="button" data-action="confirm">확인</button>
-      <button class="${style['modal-button']}" type="button" data-action="close">취소</button>
+      <button
+        class="${style['modal-button']}" 
+        type="button" 
+        data-action="confirm"
+        aria-label="확인하기 버튼"
+      >
+        확인
+      </button>
+      <button
+        class="${style['modal-button']}" 
+        type="button" 
+        data-action="close"
+        aria-label="취소하기 버튼"
+      >
+        취소
+      </button>
     </div>
     `;
   };

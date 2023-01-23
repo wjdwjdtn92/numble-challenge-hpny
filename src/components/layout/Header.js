@@ -25,7 +25,11 @@ export default function Header({ $target, initialState }) {
         ${
           this.state.isShowBackButton
             ? `
-            <button class=${classes['header__nav-back-button']} id="back-button">
+            <button
+              class=${classes['header__nav-back-button']} 
+              id="back-button"
+              aria-label="뒤로가기 버튼"
+            >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="33"
@@ -51,6 +55,7 @@ export default function Header({ $target, initialState }) {
             <button 
               class=${classes['header__nav-new-button']}  
               id="post-new-button"
+              aria-label="게시판 글 작성하기 버튼"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
