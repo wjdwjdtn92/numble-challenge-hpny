@@ -1,6 +1,7 @@
 import PostForm from '../components/PostForm/PostForm';
 import { createPost } from '../lib/postsApi';
 import { getRandomPhoto } from '../lib/unsplashApi';
+import { routeChage } from '../router';
 
 export default function PostUploadPage({ $target }) {
   this.state = {
@@ -24,7 +25,7 @@ export default function PostUploadPage({ $target }) {
         event.target.classList.add('click-block');
 
         const response = await getRandomPhoto();
-        const image = response[0].urls.small;
+        const image = response[0].urls?.small;
         this.setState({ image });
 
         event.target.classList.remove('click-block');
@@ -35,9 +36,12 @@ export default function PostUploadPage({ $target }) {
         this.setState({ ...data });
         const response = await createPost(this.state);
 
-        if (response.code === 201) {
-          //성공 실패 팝업
-          console.log('성공');
+        if (response?.code === 201) {
+          routeChage('/');
+        } else if (response?.code === 400) {
+          console.log('bad request error');
+        } else {
+          console.log('server Error');
         }
       },
     });

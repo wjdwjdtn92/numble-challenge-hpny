@@ -1,6 +1,7 @@
 import Button from '../UI/Button';
 import classes from './PostForm.module.css';
 import ImageNotFound from '../../assets/images/image_not_found.png';
+import ModalContent from '../Modal/ModalContent';
 
 export default function PostForm({ $target, props, onClick, onSubmit }) {
   this.props = props;
@@ -8,12 +9,12 @@ export default function PostForm({ $target, props, onClick, onSubmit }) {
   this.$element.className = classes['post-form'];
   $target.appendChild(this.$element);
 
-  this.render = async () => {
-    const { title, content, image, action } = this.props;
-    const addButtonText = image.length === 0 ? '추가하기' : '변경하기';
-    const submitButtonText = action === 'create' ? '등록하기' : '변경하기';
-    const src = image.length === 0 ? ImageNotFound : image;
+  const { title, content, image, action } = this.props;
+  const addButtonText = image.length === 0 ? '추가하기' : '변경하기';
+  const submitButtonText = action === 'create' ? '등록' : '변경';
+  const src = image.length === 0 ? ImageNotFound : image;
 
+  this.render = async () => {
     this.$element.insertAdjacentHTML(
       'beforeend',
       `
@@ -68,7 +69,7 @@ export default function PostForm({ $target, props, onClick, onSubmit }) {
       $target: this.$element,
       attributes: {
         className: classes['post-form__button'],
-        textContent: submitButtonText,
+        textContent: `${submitButtonText}하기`,
         ariaLabel: `${submitButtonText} 버튼`,
         type: 'submit',
         onclick: this.handleSubmit,
@@ -87,9 +88,24 @@ export default function PostForm({ $target, props, onClick, onSubmit }) {
       }
     }
 
-    onSubmit({
-      title: formData.get('title'),
-      content: formData.get('content'),
+    window.modal.classList.add('modal-show');
+    window.modal.innerHTML = '';
+    new ModalContent({
+      $target: window.modal,
+      props: {
+        title: `게시물 ${submitButtonText}`,
+        content: `게시물을 정말 ${submitButtonText}하시겠습니까?`,
+      },
+      onConfirm: async () => {
+        onSubmit({
+          title: formData.get('title'),
+          content: formData.get('content'),
+        });
+        window.modal.classList.remove('modal-show');
+      },
+      onCancel: () => {
+        window.modal.classList.remove('modal-show');
+      },
     });
   };
 

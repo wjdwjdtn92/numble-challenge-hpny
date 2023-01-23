@@ -35,12 +35,12 @@ export default function PostDetailPage({ $target, postId }) {
     onDelete: async (postId) => {
       const response = await deletePost(postId);
 
-      if (response.code !== 200) {
+      if (response?.code !== 200) {
         console.log('error');
         return;
       }
 
-      this.render();
+      routeChage(`/`);
     },
   });
 

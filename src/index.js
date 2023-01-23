@@ -1,4 +1,8 @@
 import App from './App.js';
+import Modal from './components/modal/modal.js';
 import './index.css';
 
-new App({ $target: document.querySelector('.app') });
+const $app = document.querySelector('.app');
+
+new Modal({ $target: $app });
+new App({ $target: $app });

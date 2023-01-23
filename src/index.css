@@ -91,6 +91,10 @@ button {
   }
 }
 
+.modal-show {
+  display: flex;
+}
+
 .click-block {
   background-color: rgb(181, 178, 178);
   color: #fff;

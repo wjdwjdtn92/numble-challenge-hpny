@@ -1,4 +1,5 @@
 import { imageLoad } from '../../lib/image';
+import ModalContent from '../Modal/ModalContent';
 import classes from './PostDetail.module.css';
 
 export default function PostDetail({
@@ -86,7 +87,23 @@ export default function PostDetail({
     }
 
     if ($button.id === 'post-delete-button') {
-      onDelete(this.state.postId);
+      window.modal.classList.add('modal-show');
+      window.modal.innerHTML = '';
+      new ModalContent({
+        $target: window.modal,
+        props: {
+          title: `게시물 삭제`,
+          content: `게시물을 정말로 삭제하시겠습니까?`,
+        },
+        onConfirm: async () => {
+          onDelete(this.state.postId);
+          window.modal.classList.remove('modal-show');
+        },
+        onCancel: () => {
+          window.modal.classList.remove('modal-show');
+        },
+      });
+
       return;
     }
   });

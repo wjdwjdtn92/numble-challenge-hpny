@@ -46,11 +46,13 @@ export default function PostEditPage({ $target, postId }) {
       onSubmit: async (data) => {
         const response = await uploadPost(this.state.postId, data);
 
-        if (!response) {
-          return;
+        if (response?.code === 200) {
+          routeChage(`/post/${postId}`);
+        } else if (response?.code === 400) {
+          console.log('bad request error');
+        } else {
+          console.log('server Error');
         }
-
-        routeChage(`/post/${postId}`);
       },
     });
   };
