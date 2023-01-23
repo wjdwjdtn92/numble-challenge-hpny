@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 // const CopyPlugin = require('copy-webpack-plugin');
 // const getAbsolutePath = (target) => path.resolve(__dirname, target);
 
@@ -71,6 +72,14 @@ module.exports = {
       template: 'index.html', // template file name
     }),
     new CleanWebpackPlugin(),
-    // new CopyPlugin({ patterns: [{ from: 'src/assets', to: 'dist' }] }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: '_redirects',
+          to: '.',
+          globOptions: { ignore: ['.*'] },
+        },
+      ],
+    }),
   ],
 };
