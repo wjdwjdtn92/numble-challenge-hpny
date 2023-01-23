@@ -1,28 +1,38 @@
-import Button from '../../UI/Button';
-import classes from './PostForm.module.css';
+import Button from '../UI/Button';
+import style from './PostForm.module.css';
+import ImageNotFound from '../../assets/images/image_not_found.png';
+import ModalContent from '../Modal/ModalContent';
 
-export default function PostForm({ $target, onClick, onSubmit }) {
+export default function PostForm({ $target, props, onClick, onSubmit }) {
+  this.props = props;
   this.$element = document.createElement('Form');
-  this.$element.className = classes['post-form'];
+  this.$element.className = style['post-form'];
   $target.appendChild(this.$element);
 
-  this.setState = (newState) => {
-    // deep check
-    if (newState === this.state) {
-      return;
-    }
+  const { title, content, image, action } = this.props;
+  const addButtonText = image.length === 0 ? '추가하기' : '변경하기';
+  const submitButtonText = action === 'create' ? '등록' : '변경';
+  const src = image.length === 0 ? ImageNotFound : image;
 
-    this.state = newState;
-    this.render();
-  };
+  this.render = async () => {
+    this.$element.insertAdjacentHTML(
+      'beforeend',
+      `
+      <img
+        class="image-size-320 ${style['post-form__image']}"
+        src="${src}"
+        id="post-image" 
+        alt="업로드 이미지"
+      />
+      `,
+    );
 
-  this.render = () => {
     new Button({
       $target: this.$element,
       attributes: {
-        className: classes['post-form__button'],
-        textContent: '랜덤 이미지 추가하기',
-        ariaLabel: '랜덤 이미지 추가 버튼',
+        className: style['post-form__button'],
+        textContent: `랜덤 이미지 ${addButtonText}`,
+        ariaLabel: `랜덤 이미지 ${addButtonText} 버튼`,
         type: 'button',
         onclick: this.handleClick,
       },
@@ -32,12 +42,13 @@ export default function PostForm({ $target, onClick, onSubmit }) {
       'beforeend',
       `
       <fieldset>
-        <label class=${classes['post-form__label']}>제목</label>
+        <label class=${style['post-form__label']}>제목</label>
         <input
-          class=${classes['post-form__input-title']}
+          class=${style['post-form__input-title']}
           name="title"
           id="post-upload-form__input-title"
           placeholder="글 제목을 입력해주세요"
+          value="${title}"
           type="text"
           required
         >
@@ -46,11 +57,11 @@ export default function PostForm({ $target, onClick, onSubmit }) {
       <fieldset>
         <label>내용</label>
         <textarea
-          class=${classes['post-form__input-content']}
+          class=${style['post-form__input-content']}
           name="content"
           id="post-upload-form__input-content"
           placeholder="글 내용을 입력해주세요"
-          required></textarea>
+          required>${content}</textarea>
       </fieldset>
         `,
     );
@@ -58,16 +69,16 @@ export default function PostForm({ $target, onClick, onSubmit }) {
     new Button({
       $target: this.$element,
       attributes: {
-        className: classes['post-form__button'],
-        textContent: '등록하기',
-        ariaLabel: '등록하기 버튼',
+        className: style['post-form__button'],
+        textContent: `${submitButtonText}하기`,
+        ariaLabel: `${submitButtonText} 버튼`,
         type: 'submit',
         onclick: this.handleSubmit,
       },
     });
   };
 
-  this.handleSubmit = (event) => {
+  this.handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(this.$element);
@@ -78,18 +89,31 @@ export default function PostForm({ $target, onClick, onSubmit }) {
       }
     }
 
-    onSubmit({
-      title: formData.get('title'),
-      content: formData.get('content'),
+    window.modal.classList.add('modal-show');
+    window.modal.innerHTML = '';
+    new ModalContent({
+      $target: window.modal,
+      props: {
+        title: `게시물 ${submitButtonText}`,
+        content: `게시물을 정말 ${submitButtonText}하시겠습니까?`,
+      },
+      onConfirm: async () => {
+        onSubmit({
+          title: formData.get('title'),
+          content: formData.get('content'),
+        });
+        window.modal.classList.remove('modal-show');
+      },
+      onCancel: () => {
+        window.modal.classList.remove('modal-show');
+      },
     });
   };
 
   this.handleClick = async (event) => {
     event.preventDefault();
-    await onClick();
 
-    event.target.classList.add(classes['click-block']);
-    event.target.onclick = null;
+    onClick(event);
   };
 
   this.render();

@@ -1,48 +1,58 @@
-import PostEditForm from '../components/PostEditForm/PostEditForm.js';
+import PostForm from '../components/PostForm/PostForm.js';
 import { readPost, uploadPost } from '../lib/postsApi.js';
+import { getRandomPhoto } from '../lib/unsplashApi.js';
 import { routeChage } from '../router.js';
 
 export default function PostEditPage({ $target, postId }) {
-  this.state = {};
-  const $page = document.createElement('section');
-  $page.className = 'post-edit-section';
-  $target.appendChild($page);
-  console.log('asdasd');
+  this.state = {
+    title: '',
+    content: '',
+    image: '',
+  };
 
-  this.setState = (newState) => {
-    if (newState === this.state) {
-      return;
-    }
-
+  this.setState = async (newState) => {
     this.state = {
       ...this.state,
       ...newState,
     };
   };
-  console.log('asdasd');
 
   this.render = async () => {
     const data = await readPost(postId);
-    console.log(data);
+
     if (!data) {
       return;
     }
 
-    console.log(data.post, 'data');
-
     this.setState(data.post);
 
-    new PostEditForm({
-      $target: $page,
-      props: this.state,
+    new PostForm({
+      $target,
+      props: {
+        ...this.state,
+        action: 'edit',
+      },
+      onClick: async (event) => {
+        event.target.classList.add('click-block');
+
+        const response = await getRandomPhoto();
+        const image = response[0].urls.small;
+        this.setState({ image });
+
+        event.target.classList.remove('click-block');
+        event.target.parentNode.querySelector('#post-image').src = image;
+      },
+
       onSubmit: async (data) => {
         const response = await uploadPost(this.state.postId, data);
-        console.log(response, 'response');
-        if (!response) {
-          return;
-        }
 
-        routeChage(`/post/${postId}`);
+        if (response?.code === 200) {
+          routeChage(`/post/${postId}`);
+        } else if (response?.code === 400) {
+          console.log('bad request error');
+        } else {
+          console.log('server Error');
+        }
       },
     });
   };
