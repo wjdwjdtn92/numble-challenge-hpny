@@ -2,7 +2,7 @@ import Header from './components/layout/Header.js';
 import Main from './components/layout/Main.js';
 import Section from './components/layout/Section.js';
 
-import PostEditPage from './pags/postEditPage.js';
+import PostEditPage from './pags/PostEditPage.js';
 import PostListPage from './pags/PostListPage.js';
 import PostDetailPage from './pags/PostDetailPage.js';
 import PostUploadPage from './pags/PostUploadPage.js';
