@@ -3,11 +3,18 @@
 <br>VanillaJS 로 신년메시지 주고받는 사이트를 SPA challenge project(Numble 주관)
 
 ---
-### live server
-link: [netlify link](https://taupe-licorice-34a149.netlify.app/)
+### 기술스택
+- Vanilla js
+- [webpack](https://webpack.js.org/)
+- [CSS Module](https://webpack.js.org/loaders/css-loader/#pure-css-css-modules-and-postcss)
+
 
 ---
-### netlify http request hotfix [#3 참고](https://github.com/wjdwjdtn92/numble-challenge-hpny/pull/3)
+### live server
+link: [netlify](https://taupe-licorice-34a149.netlify.app/)
+
+---
+### netlify http request 이슈 [#3 참고](https://github.com/wjdwjdtn92/numble-challenge-hpny/pull/3)
 netlify은 https로 기본적으로 설정 되어있어 http로 요청시 오류가 발생한다.
 _redirects 파일 설정 및 meta tag 설정으로 이를 회피할 수 있다.
 
