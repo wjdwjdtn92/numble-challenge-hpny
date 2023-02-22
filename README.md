@@ -14,6 +14,12 @@
 link: [netlify](https://taupe-licorice-34a149.netlify.app/)
 
 ---
+### 개발기간
+> 01-06(금) ~ 01-26(목) 
+챌린지 자체는 01-06(금) ~ 01-19(목) 2주간 이었지만, 개인적인 시간을 많이 사용하지 못하여 아쉬움이남아
+해당 기간 이후 일주일간 보완작업을 진행했습니다.
+
+---
 ### netlify http request 이슈 [#3 참고](https://github.com/wjdwjdtn92/numble-challenge-hpny/pull/3)
 netlify은 https로 기본적으로 설정 되어있어 http로 요청시 오류가 발생한다.
 _redirects 파일 설정 및 meta tag 설정으로 이를 회피할 수 있다.
